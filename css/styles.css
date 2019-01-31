@@ -1,0 +1,20 @@
+.pokedex-list{
+  display: flex;
+  list-style-type: none;
+  flex-direction: column;
+}
+.entry{
+  flex: 0 1 50px;
+  padding: 10px;
+  margin: 5px;
+  align-items: flex-start;
+}
+button {
+  border: none;
+  background-color: #91b3ec;
+  color: black;
+  border-radius: 3px;
+  transition-duration: 0.5s;
+  transition-property: opacity;
+  width: 125px;
+}
