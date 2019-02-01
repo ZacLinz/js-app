@@ -3,10 +3,9 @@
   list-style-type: none;
   flex-direction: column;
 }
-.entry{
+li{
   flex: 0 1 50px;
   padding: 10px;
-  margin: 5px;
   align-items: flex-start;
 }
 button {
@@ -14,7 +13,8 @@ button {
   background-color: #91b3ec;
   color: black;
   border-radius: 3px;
-  transition-duration: 0.5s;
+  transition-duration: 1s;
   transition-property: opacity;
   width: 125px;
+  height: 50px;
 }
