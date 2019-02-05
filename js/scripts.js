@@ -29,7 +29,7 @@ var pokemonRepository = (function () {
 
   function loadDetails(item) {
       var url = item.detailsUrl;
-      return fetch(apiUrl).then(function (response) {
+      return fetch(url).then(function (response) {
           return response.json();
       }).then(function (details) {
           // Now we add the details to the item
@@ -56,7 +56,7 @@ function addListItem(pokemon){
   $entry.appendChild(pokeName);
   document.querySelector('.pokedex-list').append($entry);
   pokeName.addEventListener('click', function (event){
-    showDetails(pokemon.name);
+    showDetails(pokemon);
   });
 };
 
