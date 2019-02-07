@@ -18,6 +18,16 @@ button {
   width: 125px;
   height: 50px;
 }
+.closeButton{
+  border: none;
+  background-color: #91b3ec;
+  color: black;
+  border-radius: 3px;
+  transition-duration: 1s;
+  transition-property: opacity;
+  width: 125px;
+  height: 50px;
+}
 /*add modal*/
 .modal-container{
   display: none;
