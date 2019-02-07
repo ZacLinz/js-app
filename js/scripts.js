@@ -60,10 +60,65 @@ function addListItem(pokemon){
   });
 };
 
-function showDetails(item){
-  pokemonRepository.loadDetails(item).then(function (){
-  console.log(item);  });
+(function() {
+var $modalContainer = document.querySelector('.modal-container');
+
+function showModal(name, height, image) {
+  $modalContainer.innerHTML = '';
+
+  var modal = document.createElement('div');
+  modal.classList.add('modal');
+
+  var closeButton = document.createElement('closeButton');
+  closeButton.classList.add('modal-close');
+  closeButton.innerText = 'Close';
+  closeButton.addEventListener('click', hideModal);
+
+  var nameElement = document.createElement('h1');
+  nameElement.innerText = name;
+
+  var heightElement = document.createElement('p');
+  contentElement.innerText = height;
+
+  var imageElement = document.createElement('imageUrl')
+  imageElement.innerText = image;
+
+  modal.appendChild(closeButton);
+  modal.appendChild(nameElement);
+  modal.appendChild(heightElement);
+  modal.appendChild(imageElement);
+  $modalContainer.appendChild(modal);
+
+  $modalContainer.classList.add('is-visible');
 }
+
+function hideModal(){
+  $modal.container.classList.remove('is-visible');
+}
+
+document.querySelector('button').addEventListener('click', () => {
+  showModal(item.name, item.height, item.imageUrl);
+})
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
+      hideModal();
+    }
+  });
+
+  $modalContainer.addEventListener('click', (e) => {
+    var target = e.target;
+    if (target === $modalContainer) {
+      hideModal();
+    }
+  });
+
+
+function showDetails(pokemon){
+  pokemonRepository.loadDetails(item).then(function (){
+    showModal(name, height, iamge);  });
+}
+});
 
 pokemonRepository.loadList().then(function() {
 
