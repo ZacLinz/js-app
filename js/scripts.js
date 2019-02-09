@@ -32,7 +32,6 @@ var pokemonRepository = (function () {
       return fetch(url).then(function (response) {
           return response.json();
       }).then(function (details) {
-          // Now we add the details to the item
           item.imageUrl = details.sprites.front_default;
           item.height = details.height;
           item.types = Object.keys(details.types);
@@ -56,73 +55,77 @@ function addListItem(pokemon){
   $entry.appendChild(pokeName);
   document.querySelector('.pokedex-list').append($entry);
   pokeName.addEventListener('click', function (event){
-  showDetails(pokemon);
+    showDetails(pokemon);
   });
 };
 
-
 function showDetails(pokemon){
   pokemonRepository.loadDetails(pokemon).then(function (){
-      showModal(pokemon);
+      modalControls.showModal(pokemon);
   });
 };
 
 pokemonRepository.loadList().then(function() {
 pokemonRepository.getAll().forEach(function(pokemon){
   addListItem(pokemon);
+  });
 });
-});
 
-var $modalContainer = document.querySelector('.modal-container');
-var modalControl = (function(){
 
-    function hideModal(){
-      $modalContainer.classList.remove('is-visible');
-    }
+var modalControls = (function(){
+  var $modalContainer = document.querySelector('.modal-container');
 
-    document.querySelector('button').addEventListener('click', () => {
-      showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
-    })
+  function showModal(pokemon) {
+    $modalContainer.innerHTML = '';
 
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
-          hideModal();
-        }
-      });
+    var modal = document.createElement('div');
+    modal.classList.add('modal');
 
-      $modalContainer.addEventListener('click', (e) => {
-        var target = e.target;
-        if (target === $modalContainer) {
-          hideModal();
-        }
-      });
+    var closeButton = document.createElement('closeButton');
+    closeButton.classList.add('modal-close');
+    closeButton.innerText = 'Close';
+    closeButton.addEventListener('click', hideModal);
+
+    var nameElement = document.createElement('h1');
+    nameElement.innerText = pokemon.name;
+
+    var heightElement = document.createElement('p');
+    heightElement.innerText = pokemon.height;
+
+    var imageElement = document.createElement('img')
+    imageElement.setAttribute('src', pokemon.imageUrl);
+
+    modal.appendChild(closeButton);
+    modal.appendChild(nameElement);
+    modal.appendChild(heightElement);
+    modal.appendChild(imageElement);
+    $modalContainer.appendChild(modal);
+
+    $modalContainer.classList.add('is-visible');
+
+  function hideModal(){
+    $modalContainer.classList.remove('is-visible');
+  }
+
+  document.querySelector('button').addEventListener('click', () => {
+    showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
+  })
+
+  window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
+        hideModal();
+      }
     });
 
-    function showModal(name, height, image) {
-      $modalContainer.innerHTML = '';
+    $modalContainer.addEventListener('click', (e) => {
+      var target = e.target;
+      if (target === $modalContainer) {
+        hideModal();
+      }
+    });
+  }
 
-      var modal = document.createElement('div');
-      modal.classList.add('modal');
-
-      var closeButton = document.createElement('closeButton');
-      closeButton.classList.add('modal-close');
-      closeButton.innerText = 'Close';
-      closeButton.addEventListener('click', modalControl.hideModal);
-
-      var nameElement = document.createElement('h1');
-      nameElement.innerText = name;
-
-      var heightElement = document.createElement('p');
-      heightElement.innerText = height;
-
-      var imageElement = document.createElement('imageUrl')
-      imageElement.setAttribute('src', image);
-
-      modal.appendChild(closeButton);
-      modal.appendChild(nameElement);
-      modal.appendChild(heightElement);
-      modal.appendChild(imageElement);
-      $modalContainer.appendChild(modal);
-
-      $modalContainer.classList.add('is-visible');
+    return {
+      showModal: showModal
     }
+  })();

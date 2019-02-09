@@ -73,6 +73,12 @@ button {
   margin-top: 0;
 }
 
+.modal img{
+  display: block;
+  margin: 0 auto;
+  width: 250px;
+}
+
 .modal p {
   margin-bottom: 0;
 }
