@@ -73,8 +73,9 @@ pokemonRepository.getAll().forEach(function(pokemon){
 });
 });
 
+var $modalContainer = document.querySelector('.modal-container');
 var modalControl = (function(){
-  var $modalContainer = document.querySelector('.modal-container');
+
     function hideModal(){
       $modalContainer.classList.remove('is-visible');
     }
