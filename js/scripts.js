@@ -99,7 +99,7 @@ var modalControl = (function(){
     });
 
     function showModal(name, height, image) {
-      modalControl.$modalContainer.innerHTML = '';
+      $modalContainer.innerHTML = '';
 
       var modal = document.createElement('div');
       modal.classList.add('modal');
@@ -107,7 +107,7 @@ var modalControl = (function(){
       var closeButton = document.createElement('closeButton');
       closeButton.classList.add('modal-close');
       closeButton.innerText = 'Close';
-      closeButton.addEventListener('click', hideModal);
+      closeButton.addEventListener('click', modalControl.hideModal);
 
       var nameElement = document.createElement('h1');
       nameElement.innerText = name;
