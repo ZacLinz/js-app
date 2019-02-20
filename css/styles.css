@@ -8,6 +8,9 @@ li{
   padding: 10px;
   align-items: flex-start;
 }
+body{
+  background-color: #94f46e
+}
 button {
   border: none;
   background-color: #91b3ec;
@@ -58,6 +61,7 @@ button {
   width: 100%;
   max-width: 700px;
   text-align: left;
+  background-color: #92ce93;
 }
 
 .modal-close{
